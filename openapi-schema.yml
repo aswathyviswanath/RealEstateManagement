@@ -1,0 +1,447 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /rides/:
+    get:
+      operationId: listRides
+      description: ''
+      parameters:
+      - name: page_num
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - count
+                - results
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page_num=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page_num=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ride'
+          description: ''
+      tags:
+      - rides
+    post:
+      operationId: createRide
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ride'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ride'
+          description: ''
+      tags:
+      - rides
+  /rides/{id}/:
+    get:
+      operationId: retrieveRide
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ride.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ride'
+          description: ''
+      tags:
+      - rides
+    put:
+      operationId: updateRide
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ride.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ride'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ride'
+          description: ''
+      tags:
+      - rides
+    patch:
+      operationId: partialUpdateRide
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ride.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ride'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ride'
+          description: ''
+      tags:
+      - rides
+    delete:
+      operationId: destroyRide
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ride.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - rides
+  /accounts/register:
+    post:
+      operationId: createRegister
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+      tags:
+      - accounts
+  /accounts/login:
+    post:
+      operationId: createLogin
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+      tags:
+      - accounts
+  /accounts/login/refresh:
+    post:
+      operationId: createTokenRefresh
+      description: 'Takes a refresh type JSON web token and returns an access type
+        JSON web
+
+        token if the refresh token is valid.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+      tags:
+      - accounts
+  /rides/{id}/cancel_ride/:
+    put:
+      operationId: cancelRideRide
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ride.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ride'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ride'
+          description: ''
+      tags:
+      - rides
+  /rides/{id}/complete_ride/:
+    put:
+      operationId: completeRideRide
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ride.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ride'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ride'
+          description: ''
+      tags:
+      - rides
+  /rides/{id}/start_ride/:
+    put:
+      operationId: startRideRide
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ride.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Ride'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ride'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ride'
+          description: ''
+      tags:
+      - rides
+components:
+  schemas:
+    Ride:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        rider:
+          type: string
+        pickup_location:
+          type: string
+          maxLength: 255
+        dropoff_location:
+          type: string
+          maxLength: 255
+        status:
+          enum:
+          - REQUESTED
+          - ACCEPTED
+          - STARTED
+          - COMPLETED
+          - CANCELLED
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        current_location:
+          type: string
+          nullable: true
+        vehicle:
+          enum:
+          - ALL
+          - CAR
+          - BIKE
+          - AUTO
+          type: string
+        driver:
+          type: integer
+      required:
+      - pickup_location
+      - dropoff_location
+      - driver
+    Register:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+\z
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 50
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          writeOnly: true
+        password2:
+          type: string
+          writeOnly: true
+        user_type:
+          enum:
+          - Driver
+          - Passenger
+          type: string
+          nullable: true
+      required:
+      - username
+      - first_name
+      - last_name
+      - email
+      - password
+      - password2
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+      - username
+      - password
+    TokenRefresh:
+      type: object
+      properties:
+        refresh:
+          type: string
+        access:
+          type: string
+          readOnly: true
+      required:
+      - refresh
